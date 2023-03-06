@@ -13,14 +13,7 @@ export default async function handler (req, res) {
 		})
 	}
 	else {
-		// const filePath = path.resolve(process.cwd(), 'db/reports.json')
-		// const filePath = path.resolve(process.cwd(), 'public/db/reports.json')
-		// const reportDataFile = fs.readFileSync(filePath, 'utf8')
-		// const decodedReportDataFile = isJSON(reportDataFile) ? JSON.parse(reportDataFile) : []
 		const {data, error} = await supabase.from('reports').select('*')
-
-		console.clear()
-		console.log(data)
 
 		if (error) {
 			res.status(200).json({

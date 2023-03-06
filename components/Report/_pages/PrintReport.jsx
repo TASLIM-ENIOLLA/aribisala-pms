@@ -22,13 +22,13 @@ class PrintReport extends Component {
 				const body = document.createElement('body')
 
 				const script = document.createElement('script')
-				script.innerText = `document.querySelector('#printButton').addEventListener('click', (e) => {e.target.parentElement.remove(); window.print(); window.close()})`;
+				script.innerText = `document.querySelector('#printButton').addEventListener('click', (e) => {e.target.parentElement.remove(); document.head.title.inn window.print(); window.close()})`;
 
 				const style = document.createElement('style')
-				style.innerText = `thead > td{padding: 10px;}`
+				style.innerText = `thead > td{padding: 15px;} .table-container{min-height: calc(100vh - 77.75px);}`
 
 				const header = document.createElement('header')
-				header.classList = 'px-3 py-4 position-sticky bg-white border-bottom'
+				header.classList = 'px-3 py-4 position-sticky bg-light border-bottom'
 				header.style = 'top: 0; left: 0;'
 
 				const printButton = document.createElement('button')
@@ -38,20 +38,23 @@ class PrintReport extends Component {
 
 				header.appendChild(printButton)
 
+				const tableContainer = document.createElement('div')
+				tableContainer.classList = 'table-container'
+				tableContainer.style = 'overflow: auto;'
+
 				const table = document.createElement('table')
 				table.classList = 'table text-capitalize'
 
 				const thead = document.createElement('thead')
-				thead.style = 'padding: 0 15px;'
 
 				const tbody = document.createElement('tbody')
 
 				if (true) {
 					const tr = document.createElement('tr');
 
-					['floor', 'room', 'issues', 'comment', 'solution', 'date'].forEach((col) => {
+					['S/N', 'floor', 'room', 'issues', 'comment', 'solution', 'date'].forEach((col) => {
 						const td = document.createElement('td')
-						td.style = `padding-top: 10px; padding-bottom: 10px;`
+						td.style = `padding-top: 20px; padding-bottom: 20px;`
 						td.innerText = col
 
 						tr.appendChild(td)
@@ -60,49 +63,53 @@ class PrintReport extends Component {
 					thead.appendChild(tr)
 				}
 
-				result.forEach((row) => {
-					const tr = document.createElement('tr');
+				result.forEach(({floor, room, issues, comment, solution, date}, index) => {
+					const tr = document.createElement('tr')
 
-					Object.values(row).forEach((col, index, array) => {
-						const td = document.createElement('td')
+					const td0 = document.createElement('td')
+					const td1 = document.createElement('td')
+					const td2 = document.createElement('td')
+					const td3 = document.createElement('td')
+					const td4 = document.createElement('td')
+					const td5 = document.createElement('td')
+					const td6 = document.createElement('td')
 
-						if (index === 0) {
-							td.innerText = getFloorData(col).name
-						}
-						else if (index === 1) {
-							td.innerText = getRoomData(array[--index], col).name
-						}
-						else if (Array.isArray(col)) {
-							const ul = document.createElement('ul')
+					td0.innerText = ++index
+					td1.innerText = getFloorData(floor).name
+					td1.style = 'min-width: 80px;'
+					td2.innerText = getRoomData(floor, room).name
+					td2.style = 'min-width: 80px;'
+					td3.innerHTML = `<ul>${issues.reduce((acc, each) => (
+						`${acc}<li>${each}</li>`
+					), '')}</ul>`
+					td3.style = 'min-width: 100px;'
+					td4.innerText = comment
+					td4.style = 'min-width: 200px;'
+					td5.innerText = solution
+					td5.style = 'min-width: 200px;'
+					td6.innerText = new Date(date).toDateString()
+					td6.style = 'min-width: 80px;'
 
-							col.forEach((each) => {
-								const li = document.createElement('li')
-								li.innerText = each
-
-								ul.appendChild(li)
-							})
-
-							td.appendChild(ul)
-						}
-						else if (new Date(col) !== 'Invalid Date' && !isNaN(new Date(col))) {
-							td.innerText = new Date(col).toDateString()
-						}
-						else {
-							td.innerText = col
-						}
-
-						tr.appendChild(td)
-					})
+					tr.appendChild(td0)
+					tr.appendChild(td1)
+					tr.appendChild(td2)
+					tr.appendChild(td3)
+					tr.appendChild(td4)
+					tr.appendChild(td5)
+					tr.appendChild(td6)
 
 					tbody.appendChild(tr)
+
 				})
 
 
 				table.appendChild(thead)
 				table.appendChild(tbody)
 
+				tableContainer.appendChild(table)
+
 				body.appendChild(header)
-				body.appendChild(table)
+				body.appendChild(tableContainer)
 				body.appendChild(script)
 
 				head.appendChild(style)
@@ -111,9 +118,6 @@ class PrintReport extends Component {
 				html.appendChild(body)
 
 				newWindow.document.write(html.outerHTML)
-				
-				// newWindow.print()
-				// newWindow.close()
 			}
 			else alert('Empty rows returned!')
 		})
@@ -174,10 +178,6 @@ class PrintReport extends Component {
 		this.instantiateSearchWindow()
 	}
 	componentDidUpdate (_, prevState) {
-		if (this.state.report !== undefined) {
-
-		}
-
 		this.instantiateSearchWindow()
 	}
 	render () {
