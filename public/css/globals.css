@@ -1,0 +1,112 @@
+@import url("./animate.css");
+@import url("./bootstrap.min.css");
+@import url("./fonts.css");
+@import url("./common.css");
+@import url("../b-icon/css/bootstrap-icons.css");
+
+:root{
+	--theme-grey-bg: #343541;
+	--theme-grey-bg-light: #3e3f4b;
+	--theme-grey-bg-dark: #30313761;
+	--theme-black-bg: #202123;
+	--dashboard-blue: #5161ce;
+	--dashboard-creame: #f9ffff;
+	--theme-green: #09cf83;
+	
+	--sidebar-min-width: 250px;
+}
+*{
+    font-size: 11.5px;
+    font-family: RobotoRegular;
+    letter-spacing: .5px;
+}
+::placeholder{
+	color: white;
+}
+/**::-webkit-scrollbar{
+	background-color: transparent;
+	width: 8px;
+}
+*::-webkit-scrollbar-thumb{
+	background-color: rgba(100, 100, 100, 0);
+	border-radius: 10px;
+	transition: .5s;
+}
+*:hover*::-webkit-scrollbar-thumb{
+	background-color: rgba(100, 100, 100, .2);
+}*/
+.theme-green-color{
+	color: var(--theme-green);
+}
+.theme-green-bg{
+	background: var(--theme-green);
+}
+.dashboard-creame-bg{
+	background-color: var(--dashboard-creame);
+}
+.dashboard-creame-color{
+	color: var(--dashboard-blue);
+}
+.dashboard-blue-bg{
+	background-color: var(--dashboard-blue);
+}
+.dashboard-blue-color{
+	color: var(--dashboard-blue);
+}
+.theme-grey-bg{
+	background-color: var(--theme-grey-bg);
+}
+.theme-grey-bg-dark{
+	background-color: var(--theme-grey-bg-dark);
+}
+.theme-grey-bg-light{
+	background-color: var(--theme-grey-bg-light);
+}
+.theme-black-bg{
+	background-color: var(--theme-black-bg);
+}
+.sidebar-min-width{
+	min-width: var(--sidebar-min-width);
+}
+.overflow-0{
+	overflow: hidden !important;
+}
+.overflow-y-auto{
+	overflow-y: auto !important;
+}
+.overflow-x-auto{
+	overflow-x: auto !important;
+}
+.bg-clear{
+	background-color: transparent !important;
+}
+.border-0{
+	border: none !important;
+}
+.outline-0{
+	outline: none !important;
+}
+.shadow-0{
+	box-shadow: none !important;
+}
+.h-35{
+	max-height: 35%;
+}
+.fa-2x{
+	font-size: 2rem;
+}
+.text-sentence::first-letter{
+	text-transform: capitalize;
+}
+.break-all{
+	word-break: break-all;
+}
+.bold{
+	font-family: RobotoBold;
+}
+.underline-0{
+	text-decoration: none !important;
+}
+.min-h-100pcent{
+	min-height: 100%;
+}
