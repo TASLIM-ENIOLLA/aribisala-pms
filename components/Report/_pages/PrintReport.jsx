@@ -22,7 +22,7 @@ class PrintReport extends Component {
 				const body = document.createElement('body')
 
 				const script = document.createElement('script')
-				script.innerText = `document.querySelector('#printButtond').addEventListener('click', (e) => {e.target.parentElement.remove(); document.head.title.inn window.print(); window.close()})`;
+				script.innerText = `document.querySelector('#printButton').addEventListener('click', (e) => {e.target.parentElement.remove(); document.title = '${document.title} - ${new Date().toLocaleDateString()}'; window.print(); window.close()})`;
 
 				const style = document.createElement('style')
 				style.innerText = `thead > td{padding: 15px;} .table-container{min-height: calc(100vh - 77.75px);}`
@@ -35,7 +35,6 @@ class PrintReport extends Component {
 				printButton.classList = 'btn btn-dark py-3 px-5 bold'
 				printButton.id = 'printButton'
 				printButton.innerText = 'Print as PDF'
-				printButton.setAttribute('onclick', 'window.print()')
 
 				header.appendChild(printButton)
 
